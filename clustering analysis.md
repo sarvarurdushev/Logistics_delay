@@ -7,8 +7,7 @@
 ## 📊 Step 1: Environment Setup and Data Loading
 
 ### Code
-```
-python
+```python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -293,6 +292,173 @@ Directly translating the 180-line analysis into **revenue-generating business ac
    - Visualize results with 2D PCA plots
 
 ---
+## Results
+```
+Loaded 15549 orders
+
+Profit - Sales: 0.14
+Quantity - Sales: 0.12
+Discount - Profit Ratio: -0.02
+
+/tmp/ipython-input-3746881429.py:22: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  data_new['shipping_date'].fillna(data_new['shipping_date'].mode()[0], inplace=True)
+/tmp/ipython-input-3746881429.py:23: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  data_new['order_date'].fillna(data_new['order_date'].mode()[0], inplace=True)
+/tmp/ipython-input-3746881429.py:27: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  data_new['shipping_time_days'].fillna(data_new['shipping_time_days'].mean(), inplace=True)
+Prepared 49 features from 15549 orders
+
+Step 4: Finding customer groups...
+5D PCA explains 23.5% of data variance
+
+DBSCAN quality: 0.37
+K-Means quality: 0.56
+Agglomerative quality: 0.56
+DBSCAN found 16 groups
+
+
+
+Average values per cluster:
+         profit_per_order  sales_per_customer  category_id  customer_id  \
+cluster                                                                   
+-1                 -90.71              357.59        35.55      7364.50   
+ 0                  24.66              183.41        31.03      6383.60   
+ 1                  23.64              176.36        29.73      6231.84   
+ 2                  22.32              177.29        30.27      6270.35   
+ 3                  21.29              174.10        35.14      7560.83   
+ 4                  32.68              164.37        30.30      6041.27   
+ 5                -249.45               77.07        29.55      6490.47   
+ 6                  59.15              210.74        23.57      5634.80   
+ 7                  11.28              110.62        21.81      6553.66   
+ 8                  18.13              123.22        27.32      5008.20   
+ 9                 211.83              485.46         9.00      5933.37   
+ 10                297.50             1213.41        64.33     13647.98   
+ 11                 23.02              111.51        25.88      6560.38   
+ 12                 42.18              151.60        28.88      7384.72   
+ 13                162.16              461.53         9.00      7617.58   
+ 14                 44.21              184.34        37.88      5860.63   
+ 15                 55.98              273.14        33.17      4599.72   
+
+         customer_zipcode  department_id  latitude  longitude  \
+cluster                                                         
+-1               40561.30           5.73     30.56     -87.47   
+ 0               34682.78           5.41     29.64     -84.17   
+ 1               35327.94           5.30     29.64     -84.35   
+ 2               35933.75           5.36     29.53     -84.55   
+ 3               36018.27           5.59     29.68     -84.95   
+ 4               35946.19           5.36     30.22     -84.84   
+ 5               39196.96           5.27     26.93     -84.35   
+ 6               29722.35           4.73     28.16     -81.09   
+ 7               25111.50           4.43     27.33     -77.73   
+ 8               30796.06           4.83     27.90     -82.00   
+ 9               57038.21           3.00     33.48     -92.30   
+ 10              39621.26          10.00     31.31     -88.81   
+ 11              35125.30           4.75     34.93     -88.16   
+ 12              38797.81           5.12     29.79     -85.86   
+ 13              35279.76           3.00     30.65     -82.55   
+ 14              23621.12           6.12     27.33     -76.80   
+ 15              26795.35           5.83     30.94     -80.87   
+
+         order_customer_id  order_id  ...  order_item_profit_ratio  \
+cluster                               ...                            
+-1                 7129.26  43071.77  ...                    -0.40   
+ 0                 6397.02  38548.44  ...                     0.12   
+ 1                 6241.59  30565.64  ...                     0.13   
+ 2                 6269.42  36744.76  ...                     0.13   
+ 3                 7557.64  34703.25  ...                     0.12   
+ 4                 6049.41  46302.41  ...                     0.18   
+ 5                 6585.20  35850.22  ...                    -2.67   
+ 6                 5487.07  46723.11  ...                     0.29   
+ 7                 6511.35  37598.48  ...                     0.12   
+ 8                 4821.52  37119.67  ...                     0.19   
+ 9                 5942.77  56956.71  ...                     0.44   
+ 10               13725.92  70181.46  ...                     0.26   
+ 11                6570.78  45461.72  ...                     0.28   
+ 12                7419.24  34050.38  ...                     0.27   
+ 13                7570.72  46589.37  ...                     0.36   
+ 14                5880.41  35386.52  ...                     0.27   
+ 15                4711.27  45258.84  ...                     0.20   
+
+         order_item_quantity    sales  order_item_total_amount  \
+cluster                                                          
+-1                      1.84   401.67                   323.17   
+ 0                      2.16   204.04                   183.54   
+ 1                      2.25   196.99                   176.69   
+ 2                      2.21   196.77                   177.51   
+ 3                      2.05   194.63                   174.41   
+ 4                      2.11   182.55                   164.63   
+ 5                      1.73    85.57                    77.89   
+ 6                      3.09   237.94                   208.79   
+ 7                      1.86   122.09                   111.28   
+ 8                      1.50   139.98                   124.66   
+ 9                      5.00   499.95                   481.12   
+ 10                     1.00  1500.00                  1283.60   
+ 11                     1.88   127.47                   109.10   
+ 12                     2.81   166.32                   151.10   
+ 13                     5.00   499.95                   462.37   
+ 14                     2.50   212.48                   192.42   
+ 15                     2.83   308.29                   275.49   
+
+         order_profit_per_order  product_card_id  product_category_id  \
+cluster                                                                 
+-1                      -160.47           765.26                36.11   
+ 0                        25.23           679.59                30.97   
+ 1                        22.65           652.72                29.72   
+ 2                        24.06           664.40                30.16   
+ 3                        22.70           750.15                34.99   
+ 4                        32.77           666.64                30.20   
+ 5                      -242.27           641.18                29.55   
+ 6                        60.79           509.16                23.42   
+ 7                        11.01           466.00                22.04   
+ 8                        16.53           598.35                27.67   
+ 9                       211.33           191.00                 9.00   
+ 10                      298.34          1351.00                61.06   
+ 11                       22.52           536.88                25.12   
+ 12                       43.10           617.76                29.06   
+ 13                      160.73           191.00                 9.00   
+ 14                       44.68           834.84                37.88   
+ 15                       64.72           740.17                33.50   
+
+         product_price  shipping_time_days  cluster  
+cluster                                              
+-1              350.91               -3.29     -1.0  
+ 0              139.06                8.22      0.0  
+ 1              128.25                7.02      1.0  
+ 2              132.01                5.88      2.0  
+ 3              137.77                9.32      3.0  
+ 4              125.62                9.27      4.0  
+ 5               60.45               34.00      5.0  
+ 6              128.17               30.18      6.0  
+ 7               81.83              -26.14      7.0  
+ 8              114.99              -35.83      8.0  
+ 9              101.08                6.33      9.0  
+ 10            1447.82             -107.17     10.0  
+ 11              84.36              -37.12     11.0  
+ 12              81.24               13.56     12.0  
+ 13              99.99               85.73     13.0  
+ 14             138.74              -49.12     14.0  
+ 15             184.98               -9.33     15.0  
+
+[17 rows x 25 columns]
+
+ Analysis complete!
+```
+<img width="1790" height="490" alt="image" src="https://github.com/user-attachments/assets/38d48a4a-39c7-4a1f-a85d-2465cda2e69e" />
 
 ## 📝 References
 
@@ -306,9 +472,9 @@ Directly translating the 180-line analysis into **revenue-generating business ac
 
 For questions or contributions, please open an issue or submit a pull request.
 
-**Author**: Your Name  
-**Date**: 2024  
-**License**: MIT
+**Author**: Sarvar Urdushev 
+**Date**: 2025  
+
 
 ---
 
