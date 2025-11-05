@@ -313,6 +313,126 @@ Compared to text-only confusion matrix (difficult to spot patterns in 2×2 grid 
 ### 🎯 **4. Contribution to Goal**
 Enables operations managers to understand model performance **without statistics background** and make data-driven decisions: "The confusion matrix shows 8,125 Not-Delayed predictions were correct (94% of actual Not-Delayed orders) and 2,850 Delayed predictions were correct (68% of actual Delayed orders), but 1,350 Delayed orders were misclassified as Not-Delayed—these are our biggest risk representing $270k in refund costs. Decision: Lower the prediction threshold from 0.5 to 0.35 for 'Delayed' class, accepting more false positives (500 additional unnecessary expedites costing $7,500 total) to catch an additional 600 of these false negatives (saving $120k in refunds), improving net ROI from $640k to $753k annually—this single visualization justifies the threshold adjustment generating $113k incremental value."
 
+### Results
+```
+`Loading data...
+✓ Loaded 15549 orders
+
+Step 1: Grouping rare categories...
+✓ Grouped rare locations into 'Others'
+
+Step 2: Removing unhelpful features...
+✓ Removed 10 categories that don't predict delays
+✓ Removed 11 duplicate numbers and 4 text columns
+
+Step 3: Creating processing time feature...
+✓ Calculated days between order and shipping
+
+Step 4: Converting categories to numbers...
+✓ 18 features ready
+✓ 6573 not delayed, 8976 delayed
+
+Step 5: Training 5 different models...
+
+Training Decision Tree...
+  Training accuracy: 71.3%
+  Testing accuracy: 72.0%
+
+  Results on test data:
+              precision    recall  f1-score   support
+
+ Not Delayed       0.63      0.86      0.72      1660
+     Delayed       0.85      0.62      0.72      2228
+
+    accuracy                           0.72      3888
+   macro avg       0.74      0.74      0.72      3888
+weighted avg       0.76      0.72      0.72      3888
+
+
+Training Random Forest...
+  Training accuracy: 70.6%
+  Testing accuracy: 71.2%
+
+  Results on test data:
+              precision    recall  f1-score   support
+
+ Not Delayed       0.62      0.82      0.71      1660
+     Delayed       0.82      0.63      0.72      2228
+
+    accuracy                           0.71      3888
+   macro avg       0.72      0.72      0.71      3888
+weighted avg       0.74      0.71      0.71      3888
+
+
+Training AdaBoost...
+/usr/local/lib/python3.12/dist-packages/sklearn/ensemble/_weight_boosting.py:519: FutureWarning: The parameter 'algorithm' is deprecated in 1.6 and has no effect. It will be removed in version 1.8.
+  warnings.warn(
+  Training accuracy: 70.9%
+  Testing accuracy: 71.3%
+
+  Results on test data:
+              precision    recall  f1-score   support
+
+ Not Delayed       0.63      0.79      0.70      1660
+     Delayed       0.81      0.65      0.72      2228
+
+    accuracy                           0.71      3888
+   macro avg       0.72      0.72      0.71      3888
+weighted avg       0.73      0.71      0.71      3888
+
+
+Training Gradient Boosting...
+  Training accuracy: 73.5%
+  Testing accuracy: 72.2%
+
+  Results on test data:
+              precision    recall  f1-score   support
+
+ Not Delayed       0.64      0.78      0.71      1660
+     Delayed       0.80      0.68      0.74      2228
+
+    accuracy                           0.72      3888
+   macro avg       0.72      0.73      0.72      3888
+weighted avg       0.74      0.72      0.72      3888
+
+
+Training Stacking...
+  Training accuracy: 18.0%
+  Testing accuracy: 59.8%
+
+  Results on test data:
+              precision    recall  f1-score   support
+
+ Not Delayed       0.53      0.53      0.53      1660
+     Delayed       0.65      0.64      0.65      2228
+
+    accuracy                           0.60      3888
+   macro avg       0.59      0.59      0.59      3888
+weighted avg       0.60      0.60      0.60      3888
+
+
+======================================================================
+RESULTS SUMMARY
+======================================================================
+🏆 Gradient Boosting: 72.2%
+2. Decision Tree: 72.0%
+3. AdaBoost: 71.3%
+4. Random Forest: 71.2%
+5. Stacking: 59.8%
+
+✓ Best model: Gradient Boosting
+
+Step 7: Creating confusion matrix...
+
+✓ Confusion matrix created
+
+======================================================================
+✓ Analysis complete!
+======================================================================
+
+```
+<img width="750" height="590" alt="image" src="https://github.com/user-attachments/assets/680c174c-2bec-48e6-8823-4796f95abdd5" />
+
 ---
 
 ## 📈 Key Performance Metrics
